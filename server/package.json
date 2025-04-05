@@ -10,7 +10,7 @@
 	  "build": "npm run build --prefix client && npm run server",
 	  "server": "node api/index.js",
 	  "client": "npm run build --prefix client",
-	  "deploy": "npm run build && npm run server"
+	  "deploy": "node api/index.js"
 	},
 	"dependencies": {
 	  "@google/genai": "^0.7.0",
