@@ -19,14 +19,14 @@ app.use(
 );
 
 // Serve static files from the 'dist' folder
-app.use(express.static(path.join(__dirname, '..', '..', 'client', 'dist')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // Any routes you have for API endpoints
 // app.use('/api', apiRouter);
 
 // Catch-all route to serve the Vite frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', '..', 'client', 'dist', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
 });
 
 
