@@ -79,7 +79,7 @@ async function generateDocxFile(studentData, outputPath) {
           new Paragraph({
             children: [
               new TextRun({ text: "SEMESTER: ..................................." }),
-              new TextRun({ text: "\tCOURSE CODE: ......................................" }),
+              new TextRun({ text: "\tCOURSE CODE: .............................................." }),
             ],
             tabStops: [{ type: "right", position: 10500 }],
           }),
@@ -87,7 +87,7 @@ async function generateDocxFile(studentData, outputPath) {
           new Paragraph({
             children: [
               new TextRun({ text: "SESSION: ......................................." }),
-              new TextRun({ text: "\tCOURSE TITLE: ......................................" }),
+              new TextRun({ text: "\tCOURSE TITLE: .............................................." }),
             ],
             tabStops: [{ type: "right", position: 10500 }],
           }),
