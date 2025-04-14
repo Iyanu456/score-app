@@ -16,7 +16,7 @@ const chunkArray = (array, size) => {
 
 const createFixedTable = (data = []) => {
   const tableWidth = 5058;
-  const columnWidths = [800, 1900, 600, 900, 1000];
+  const columnWidths = [700, 1900, 700, 900, 1000];
 
   const createCell = (text, isHeader = false, width) => {
     return new TableCell({

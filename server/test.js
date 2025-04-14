@@ -26,7 +26,7 @@ const chunkArray = (array, size) => {
 
 const createFixedTable = (data = []) => {
   const tableWidth = 5058;
-  const columnWidths = [800, 1900, 600, 900, 1000];
+  const columnWidths = [700, 1900, 700, 900, 1000];
 
   const createCell = (text, isHeader = false, width) => {
     return new TableCell({
@@ -106,6 +106,67 @@ const studentData = generateRandomData(56);
 
 // Split students into chunks of 40 for pagination (20 per column, 2 columns per page)
 const studentChunks = chunkArray(studentData, 40);
+
+
+
+
+const createSummaryCell = (text, isHeader) =>
+  new TableCell({
+    width: { size: 10, type: WidthType.PERCENTAGE },
+    children: [
+      new Paragraph({
+        children: [
+          new TextRun({
+            text,
+            bold: isHeader, // Make header text bold
+            
+          }),
+          
+        ],
+      }),
+    ],
+  });
+
+// Header row
+const summaryHeaderRow = new TableRow({
+  children: [
+    createSummaryCell("A", true),
+    createSummaryCell("B", true),
+    createSummaryCell("C", true),
+    createSummaryCell("D", true),
+    createSummaryCell("E", true),
+    createSummaryCell("F", true),
+    createSummaryCell("Total", true),
+  ],
+});
+
+// Data row
+const summaryDataRow = new TableRow({
+  children: [
+    createSummaryCell(""),
+    createSummaryCell(""),
+    createSummaryCell(""),
+    createSummaryCell(""),
+    createSummaryCell(""),
+    createSummaryCell(""),
+    createSummaryCell(""),
+  ],
+});
+
+// Create table
+const resultSummaryTable = new Table({
+  width: {
+    size: 60,
+    type: WidthType.PERCENTAGE,
+  },
+  rows: [summaryHeaderRow, summaryDataRow],
+  margins: {
+    top: 100,
+    bottom: 100,
+    left: 100,
+    right: 100,
+  }
+});
 
 // Create the document
 const doc = new Document({
@@ -275,7 +336,6 @@ const doc = new Document({
         sideBySideTables, // This table is unique to each chunk of data
 
         new Paragraph({ text: "" }),
-        new Paragraph({ text: "" }),
 
         new Paragraph({
           text: "Result Summary",
@@ -286,7 +346,11 @@ const doc = new Document({
 
         new Paragraph({ text: "" }),
 
-        new Paragraph({
+        resultSummaryTable, // This table is unique to each chunk of data
+
+        new Paragraph({ text: "" }),
+
+        /*new Paragraph({
           children: [
             new TextRun({ text: "A", bold: true, font: "Arial" }),
             new TextRun({ text: ": 70–100", font: "Arial" }),
@@ -314,11 +378,7 @@ const doc = new Document({
             { type: "left", position: 7600 },
             { type: "left", position: 9300 },
           ],
-        }),
-
-        new Paragraph({ text: "" }),
-
-        new Paragraph({ text: "" }),
+        }),*/
 
         new Paragraph({ text: "" }),
 

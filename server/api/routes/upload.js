@@ -79,16 +79,20 @@ async function extractDataWithGemini(filePath, mimeType) {
     const fileText = await fileToGenerativeText(filePath, mimeType);
 
     const prompt = `
-      The following is a document containing student scores:
-      ----
-      ${fileText}
-      ----
-      Extract all data from tables containing student records. 
-      For each row, identify the Serial Number (sn), Registration Number (regNo), 
-      Continuous Assessment (ca), Exam score (exam), and Total score (total). 
-      Return the data as a JSON array of objects, where each object represents one student record with these fields. 
-      Do not include blank or empty rows. Only return the JSON data, nothing else.
+    The following is a document containing student scores:
+    ----
+    ${fileText}
+    ----
+    Extract all data from tables containing student records. 
+    For each row, identify the Serial Number (sn), Registration Number (regNo), 
+    Continuous Assessment (ca), Exam score (exam), and Total score (total). 
+
+    If the Serial Number is missing or empty, automatically assign it based on the row index (starting from 1). 
+    Return the data as a JSON array of objects, where each object represents one student record with these fields: sn, regNo, ca, exam, and total.
+
+    Do not include blank or empty rows. Only return the JSON data, nothing else.
     `;
+
 
     console.log('[STEP 3] Sending prompt to Gemini...');
     const result = await model.generateContent(prompt);
